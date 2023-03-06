@@ -12,6 +12,13 @@ class TodoCard extends StatefulWidget {
 
 class _TodoCardState extends State<TodoCard> {
   bool isChecked = false;
+  bool isFavorite = false;
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +54,13 @@ class _TodoCardState extends State<TodoCard> {
             ],
           ),
           const Expanded(child: SizedBox()),
-          const Icon(Icons.star_border)
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.star : Icons.star_border,
+              color: isFavorite ? Colors.blue : null,
+            ),
+            onPressed: toggleFavorite,
+          )
         ],
       ),
     );
