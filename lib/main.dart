@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:joints_camp/pages/home.dart';
+import 'components/router.dart' as route;
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       title: "Joints Todo",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
+      onGenerateRoute: route.Router.generateRoute,
+      initialRoute: route.homeRoute,
     );
   }
 }

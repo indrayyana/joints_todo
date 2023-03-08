@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import '../model/todo_model.dart';
 
 class TodoCard extends StatefulWidget {
-  String title;
-  String date;
+  final TodoModel model;
 
-  TodoCard({super.key, required this.title, required this.date});
+  const TodoCard({super.key, required this.model});
 
   @override
   State<TodoCard> createState() => _TodoCardState();
@@ -34,23 +34,27 @@ class _TodoCardState extends State<TodoCard> {
       ]),
       child: Row(
         children: [
-          Checkbox(
-            value: isChecked,
-            onChanged: (val) {
-              setState(() {
-                isChecked = val!;
-              });
-            },
+          Transform.scale(
+            scale: 1.4,
+            child: Checkbox(
+              value: isChecked,
+              onChanged: (val) {
+                setState(() {
+                  isChecked = val!;
+                });
+              },
+              shape: const CircleBorder(),
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.title.toString(), //title
+                widget.model.title.toString(),
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              Text(widget.date.toString()), //tanggal
+              Text(widget.model.date.toString()),
             ],
           ),
           const Expanded(child: SizedBox()),
@@ -58,6 +62,7 @@ class _TodoCardState extends State<TodoCard> {
             icon: Icon(
               isFavorite ? Icons.star : Icons.star_border,
               color: isFavorite ? Colors.blue : null,
+              size: 30,
             ),
             onPressed: toggleFavorite,
           )
